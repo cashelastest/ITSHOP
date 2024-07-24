@@ -5,7 +5,8 @@
 
 <form method = 'Post'>
 	
-	{%csrf_token%}<nav align ='center'>
+	{%csrf_token%}
+	<nav align ='center'>
 
 	<div class="song_block_Pc{{request.user_agent.is_pc}}">
 	{%for f in form%}
