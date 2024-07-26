@@ -16,5 +16,6 @@
 {%endfor%}
 		<p align="right"><button type="submit" class="user_btn_Pc{{request.user_agent.is_pc}}"> <b>Отправить</b></button></p>
 	</div></nav>
+	<p><a href="{%url 'users:password_reset'%}">forget</a></p>
 </form>
 {%endblock%}

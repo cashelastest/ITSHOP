@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import *
-from IT_shop.settings import *
+from django.contrib.auth import logout
+
+from IT_shop.settings import DEFAULT_USER_IMAGE
 class Edit(UpdateView):
 	form_class=UserEditForm
 	template_name = 'users/EditProfile.html'
@@ -43,4 +45,10 @@ class LoginUser(LoginView):
 def logout_user(request):
 	logout(request)
 	return redirect('home')
-# Create your views here.
+
+
+
+class UserPasswordChange(PasswordChangeView):
+	form_class = UserPasswordChangeForm
+	success_url = reverse_lazy("users:password_change_done")
+	template_name = 'users/password_change_form.html'

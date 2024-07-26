@@ -7,10 +7,11 @@
 		{% if user.photo%}
 		<p><img src="{{user.photo.url}}" width="200px" height="200px"></p>
 		{%else%}
-		<p><img src="{{ default_image}}" width="200px" height="200px"></p>
+		<p><img src="{{default_image}}" width="200px" height="200px"></p>
 		{%endif%}
 <form action="" enctype="multipart/form-data" method="post">{% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Save" />
 </form>
+<p><a href="{% url 'users:password_change'%}">Change</a></p>
 {%endblock%}
