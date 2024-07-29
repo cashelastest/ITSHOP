@@ -1,0 +1,12 @@
+{%extends 'shop/base.html'%}
+{%block content%}
+    <h1>Your Cart</h1>
+    <ul>
+        {% for item in cart_items %}
+            <li>{{ item.product.name }} - {{ item.quantity }} - ${{ item.product.price }}</li>
+        {% endfor %}
+    </ul>
+    <p>Total: ${{ total }}</p>
+    <a href="{% url 'home' %}">Continue Shopping</a>
+
+{%endblock%}

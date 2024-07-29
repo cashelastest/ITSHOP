@@ -1,4 +1,21 @@
 {% extends 'shop/base.html'%}
 {%block content%}
 HI!!!
+
+    {% for product in products %}
+        <div>
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.description }}</p>
+            <div>
+
+                {% for image in product.images.all %}
+                    <div>
+                        <img src="{{ image.photo.url }}" alt="{{ image.caption }}">{{image.image.url}}
+                        <p>{{ image.caption }}</p>
+                    </div>
+                {% endfor %}
+                <a href="{%url 'add_to_cart' product.id%}">ADD </a>
+            </div>
+        </div>
+    {% endfor %}
 {%endblock%}

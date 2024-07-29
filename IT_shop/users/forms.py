@@ -22,11 +22,14 @@ class LoginUserForm(AuthenticationForm):
     password = forms.CharField(label = 'Секретный ключик', widget = forms.PasswordInput(attrs={'class':'form-input'}))
 class UserEditForm(forms.ModelForm):
     username = forms.CharField(label = 'Юзернейм', widget = forms.TextInput(attrs ={'class':'form-input'}))
-    email = forms.EmailField(label = 'Почта')
+    first_name = forms.CharField(label = 'NAME', widget=forms.TextInput(attrs={'class':'form-input'}))
+    last_name = forms.CharField(label = 'LASTNAME', widget=forms.TextInput(attrs={'class':'form-input'}))
+    email = forms.EmailField(label = 'Почта', widget=forms.EmailInput(attrs={'class':'form-input'}))
+    description = forms.CharField(label = 'Описание', widget=forms.Textarea(attrs={'class':'form-input'}))
     photo = forms.ImageField(widget=forms.FileInput)
     class Meta:
-        model =get_user_model()
-        fields= ('photo','username', 'first_name', 'last_name', 'email',  'description')
+        model =Profile
+        fields= ('photo','username',  "first_name", "last_name", 'email', "description")
 
 class UserPasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(label = 'old', widget = forms.PasswordInput())

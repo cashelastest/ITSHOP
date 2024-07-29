@@ -33,5 +33,6 @@ path('password-reset/<uidb64>/<token>/',
 path('password-reset/complete/', 
 	PasswordResetCompleteView.as_view(template_name = 'users/password_reset_complete.html'), 
 	name = 'password_reset_complete'),
+path('prof/<slug:profile_slug>/', views.ShowProfile.as_view(), name = 'ShowProfile')
 
 ]

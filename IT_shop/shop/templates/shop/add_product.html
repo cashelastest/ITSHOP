@@ -1,0 +1,17 @@
+{%extends 'shop/base.html'%}
+{%block content%}
+<form action="" enctype="multipart/form-data" method="post">
+{%for f in form%}
+{%csrf_token%}
+<p><b><label for="{{f.id_for_label}}">{{f.label}}</b></p><p>{{f}}</p>
+{%endfor%}
+{{images.management_form}}
+{%for f in images%}
+
+<p><b><label for="{{f.id_for_label}}">{{f.label}}</b></p><p>{{f}}</p>
+{%endfor%}
+
+
+<p align="right"><button type="submit" class="user_btn_Pc{{request.user_agent.is_pc}}"> <b>Отправить</b></button></p>
+</form>
+{%endblock%}

@@ -1,0 +1,10 @@
+{% extends 'users/base.html'%}
+{%block content%}
+hiee
+{{profile.user.username}}
+{%if song.Image%}
+<p>
+<img src="{{profile.photo.url}}"></p>
+
+{%endif%}
+{%endblock%}
