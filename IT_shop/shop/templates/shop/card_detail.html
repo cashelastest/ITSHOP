@@ -7,6 +7,6 @@
         {% endfor %}
     </ul>
     <p>Total: ${{ total }}</p>
-    <a href="{% url 'home' %}">Continue Shopping</a>
+    <a href="{% url 'mono:create_payment' %}">Continue Shopping</a>
 
 {%endblock%}

@@ -10,7 +10,33 @@ from django.http import JsonResponse
 
 @login_required
 def home(request):
- return render(request, 'shop/home.html')
+	name = request.GET.get('name')
+	filter_price_min = request.GET.get('price_min')
+	filter_price_max = request.GET.get('price_max')
+
+	print(f"Filter Price Min: {filter_price_min}, Filter Price Max: {filter_price_max}")
+	i = 0
+
+	if name:
+		print (name)
+		products = Product.objects.filter(name__icontains=name)
+		i +=1
+	if filter_price_min:
+
+		price_min = int(filter_price_min)
+		products = Product.objects.filter(price__gte=price_min)
+		i +=1
+	if filter_price_max:
+
+		price_max = int(filter_price_max)
+		products = Product.objects.filter(price__lte=price_max)
+		i +=1
+
+
+	if i ==0:
+		products = Product.objects.all()
+	
+	return render(request, 'shop/home.html', {'products': products})
 
 class AddProduct(LoginRequiredMixin,CreateView):
 	form_class = AddProduct
@@ -43,14 +69,7 @@ class ShowProduct(DetailView):
 	slug_url_kwarg = 'product_slug'
 	template_name = "shop/show_product.html"
 	context_object_name='product'
-class ProductsList(ListView):
-	model = Product
-	template_name = 'shop/home.html'
-	context_object_name = 'products'
 
-
-	def get_queryset(self):
-		return Product.objects.prefetch_related('images')
 
 
 
@@ -58,13 +77,13 @@ class ProductsList(ListView):
 def get_cart(request):
     session_id = request.session.session_key
     if not session_id:
-        request.session.create()
+    	return redirect('users:login')
     return Cart.objects.filter(session_id=session_id)
 
 def add_to_cart(request, product_id):
     session_id = request.session.session_key
     if not session_id:
-        request.session.create()
+    	return redirect('users:login')
     product = get_object_or_404(Product, id=product_id)
     cart_item, created = Cart.objects.get_or_create(product=product, session_id=session_id)
     if not created:
@@ -82,3 +101,4 @@ def remove_from_cart(request, product_id):
     cart_item = get_object_or_404(Cart, product_id=product_id, session_id=session_id)
     cart_item.delete()
     return redirect('cart_detail')
+

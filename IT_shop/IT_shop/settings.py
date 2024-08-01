@@ -29,6 +29,8 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+MONOBANK_TOKEN = 'ubPUNjHNB2UU6qSZ0ejg627uxwzfIEsb7OTNXp-WebEU'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop.apps.ShopConfig',
     'users.apps.UsersConfig',
+    'monobank.apps.MonobankConfig',
 ]
 
 MIDDLEWARE = [

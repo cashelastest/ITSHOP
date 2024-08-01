@@ -1,0 +1,16 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipt</title>
+</head>
+<body>
+    <h1>Payment Receipt</h1>
+    <p>Invoice ID: {{ invoice.invoice_id }}</p>
+    <p>Amount: {{ invoice.amount }} UAH</p>
+    <p>Reference: {{ invoice.reference }}</p>
+    <p>Destination: {{ invoice.destination }}</p>
+    <p>Status: {{ invoice.status }}</p>
+    <p>Date: {{ invoice.created_at }}</p>
+</body>
+</html>

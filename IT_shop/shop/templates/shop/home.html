@@ -1,11 +1,16 @@
 {% extends 'shop/base.html'%}
 {%block content%}
 HI!!!
-
+<form method="get">
+<input type="text" name="name">
+<input type="number" name="price_min" id="min_price">
+<input type="number" name="price_max" id="max_price">
+<button type="submit">Sub</button></form>
     {% for product in products %}
         <div>
             <h2>{{ product.name }}</h2>
             <p>{{ product.description }}</p>
+            {{product.price}}
             <div>
 
                 {% for image in product.images.all %}
@@ -17,5 +22,8 @@ HI!!!
                 <a href="{%url 'add_to_cart' product.id%}">ADD </a>
             </div>
         </div>
-    {% endfor %}
+    {% endfor %},
+
 {%endblock%}
+
+

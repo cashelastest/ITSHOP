@@ -1,0 +1,7 @@
+<!-- monobank/templates/monobank/payment_form.html -->
+<form method="post">
+    {% csrf_token %}
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" name="amount" required>
+    <button type="submit">Pay with Monobank</button>
+</form>

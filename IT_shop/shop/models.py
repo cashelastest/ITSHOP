@@ -4,11 +4,6 @@ from users.models import Profile
 from slugify import slugify
 from unidecode import unidecode
 from django.contrib.auth.models import User
-class Category(models.Model):
-	name = models.CharField(max_length = 255)
-
-def __str__(self):
-	return self.user.username
 
 class Category(models.Model):
 	slug = models.SlugField(max_length = 255)
@@ -42,7 +37,7 @@ class ProductImages(models.Model):
 	photo = models.ImageField(upload_to = 'products/%Y/%m/%d')
 	caption = models.CharField(max_length=100, blank=True)
 class Cart(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,null=True)
     quantity = models.PositiveIntegerField(default=1)
     session_id = models.CharField(max_length=255)
     def __str__():
