@@ -1,0 +1,19 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{images.management_form}}
+{% for f in images %}
+    <b><p>{{ f }}</p></b>
+{% endfor %}
+
+<button type="submit">сщхранить</button>
+</form>
+
+
+{% endblock %}
+
+<script type="text/javascript" src={% static "shop/js/jquery-3.7.1.min.js" %}></script>
+<script type="text/javascript" src={% static "shop/js/script.js" %}></script>

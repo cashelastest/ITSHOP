@@ -3,14 +3,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="{% static 'shop/css/main.css' %}">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>SUPER</title>
+
 </head>
-<body>
+
 ok
+
 
 </body>
 </html>
 {%block content%}
+{%endblock%}
+
+
+{%block script%}
+<script type="text/javascript" src={% static "shop/js/jquery-3.7.1.min.js" %}></script>
+<script type="text/javascript" src={% static "shop/js/script.js" %}></script>
 {%endblock%}

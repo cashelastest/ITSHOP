@@ -23,9 +23,30 @@ class Product(models.Model):
 	price = models.IntegerField(verbose_name = 'price')
 	category = models.ManyToManyField(Category, verbose_name = "Категория")
 	seller = models.ForeignKey("users.Profile", on_delete = models.PROTECT, blank = True, null = True)
+	is_published = models.BooleanField(blank = True, null = True,default=False)
 
-	def __str__(self):
-		return self.name
+	likes = models.ManyToManyField(User, blank=True, related_name='likes')
+	dislikes = models.ManyToManyField(User, blank=True, related_name='dislikes')
+	def toggle_like(self, user):
+		if user in self.likes.all():
+			self.likes.remove(user)
+		else:
+			self.likes.add(user)
+		self.save()
+
+	def toggle_dislike(self, user):
+		if user in self.dislikes.all():
+			self.dislikes.remove(user)
+		else:
+			self.dislikes.add(user)
+		self.save()
+
+	def likes_count(self):
+		return self.likes.count()
+
+	def dislikes_count(self):
+		return self.dislikes.count()
+
 	def save(self, *args, **kwargs):
 		if not self.slug:
 			self.slug = slugify(self.name)
@@ -33,13 +54,14 @@ class Product(models.Model):
 	def get_absolute_url(self):
 		return reverse('product', kwargs={'product_slug': self.slug})
 class ProductImages(models.Model):
-	product = models.ForeignKey(Product, on_delete = models.PROTECT, blank = True, null = True,related_name='images')
-	photo = models.ImageField(upload_to = 'products/%Y/%m/%d')
-	caption = models.CharField(max_length=100, blank=True)
+	product = models.ForeignKey(Product, on_delete=models.CASCADE, blank = True, null = True,related_name='images')
+	photo = models.ImageField(upload_to = 'products/%Y/%m/%d', verbose_name = "")
+	caption = models.CharField(max_length=100, blank=True, null = True)
 class Cart(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE,null=True)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cart_items')
     quantity = models.PositiveIntegerField(default=1)
-    session_id = models.CharField(max_length=255)
-    def __str__():
-    	return f"{self.product.name} for {quantity}"
+
+    def __str__(self):
+        return f"{self.product.name} ({self.quantity})"
 

@@ -1,4 +1,5 @@
 {%extends 'shop/base.html'%}
+{% load static %}
 {%block content%}
 <form action="" enctype="multipart/form-data" method="post">
 {%for f in form%}
@@ -6,12 +7,19 @@
 <p><b><label for="{{f.id_for_label}}">{{f.label}}</b></p><p>{{f}}</p>
 {%endfor%}
 {{images.management_form}}
-{%for f in images%}
+    <b>Add photo:</b>
+    {% for form in images %}
 
-<p><b><label for="{{f.id_for_label}}">{{f.label}}</b></p><p>{{f}}</p>
-{%endfor%}
+<nav><p>{{form}}</p></nav>
+    {% endfor %}
+    <button id = 'add'>add</button>
+    <button id = 'del'>del</button>
 
 
 <p align="right"><button type="submit" class="user_btn_Pc{{request.user_agent.is_pc}}"> <b>Отправить</b></button></p>
 </form>
 {%endblock%}
+
+
+<script type="text/javascript" src={% static "shop/js/jquery-3.7.1.min.js" %}></script>
+<script type="text/javascript" src={% static "shop/js/main.js" %}></script>

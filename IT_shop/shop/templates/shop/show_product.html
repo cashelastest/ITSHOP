@@ -1,8 +1,16 @@
 {% extends 'shop/base.html'%}
 {%block content%}
 {{product.name}}
+{%for image in product.images.all%}
+                    <div>
+                        <p><img src="{{ image.photo.url }}" alt="{{ image.caption }}"></p>
 
-{%for p in products%}
-{{p}}
-{%endfor%}
+                    </div>
+                    {%endfor%}
+
+<p>Описание: <b>{{product.content}}</b></p>
+
+<p>Цена: <b>{{product.price}}</b></p>
+<p>Продавец: <b>{{product.seller}}</b></p>
+<a href="{%url 'add_to_cart' product.id%}">ADD TO CART</a>
 {%endblock%}

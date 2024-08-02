@@ -3,10 +3,13 @@
     <h1>Your Cart</h1>
     <ul>
         {% for item in cart_items %}
-            <li>{{ item.product.name }} - {{ item.quantity }} - ${{ item.product.price }}</li>
+            <li>{{ item.product.name }} - {{ item.quantity }} - ${{ item.product.price }} <a href = "{%url 'remove_from_cart' item.pk%}">Delete product</a></li>
         {% endfor %}
     </ul>
     <p>Total: ${{ total }}</p>
-    <a href="{% url 'mono:create_payment' %}">Continue Shopping</a>
+
+    <p><a href="{% url 'mono:create_payment' %}">Pay with mono</a></p>
+    
+    <a href="{%url 'home'%}">continiue shopping</a>
 
 {%endblock%}

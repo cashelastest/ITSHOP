@@ -24,6 +24,9 @@ def register(request):
         form = RegisterUserForm(request.POST)
         if form.is_valid():
             form.save()
+            Profile.objects.create(user=user)
+            login(request, user)
+
             return redirect('home')
     else:
         form = RegisterUserForm()

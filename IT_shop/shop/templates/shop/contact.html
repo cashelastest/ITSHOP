@@ -1,0 +1,11 @@
+{% extends 'shop/base.html'%}
+{%block content%}
+HI!!!
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="Title" required><br>
+    <textarea name="content" placeholder="Content" required></textarea><br>
+    <input type="file" name="image"><br>
+    <button type="submit">Submit</button>
+</form>
+{%endblock%}

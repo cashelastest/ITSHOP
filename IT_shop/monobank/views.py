@@ -11,6 +11,8 @@ from shop.views import *
 def create_payment(request):
     cart_items = get_cart(request)
     amount = sum(item.product.price * item.quantity for item in cart_items)
+    if amount == 0:
+        return redirect('users:login')
     redirect_url = request.build_absolute_uri('/payment-success/')
     monobank_api = MonobankAPI()
     try:

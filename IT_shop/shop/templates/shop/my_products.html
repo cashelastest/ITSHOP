@@ -1,0 +1,42 @@
+{% extends 'shop/base.html'%}
+{%block content%}
+HI!!!
+<form method="get">
+<input type="text" name="name">
+<input type="number" name="price_min" id="min_price">
+<input type="number" name="price_max" id="max_price">
+<input list="cat" name="category">
+<datalist id="cat">
+ {%for cat in cats%}   
+ <option value="{{cat.name}}">
+    {%endfor%}
+</datalist>
+<button type="submit">Sub</button></form>
+    {% for product in products %}
+        <div>
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.description }}</p>
+            {{product.price}}
+            <div>
+                <form method="post" action="{% url 'like' product.pk %}">
+                    {% csrf_token %}
+                likes:{{product.likes_count}}.
+                <button>Like</button>
+                <p>likes:{{product.dislikes_count}}.
+                </form>
+                <form method="post" action="{% url 'dislike' product.pk %}">
+                    {% csrf_token%}
+                <button>Dislike</button></p>
+</form>
+                {% for image in product.images.all %}
+                    <div>
+                        <img src="{{ image.photo.url }}" alt="{{ image.caption }}">{{image.image.url}}
+                        <p>{{ image.caption }}</p>
+                    </div>
+                {% endfor %}
+                <a href="{%url 'add_to_cart' product.id%}">ADD </a>
+            </div>
+        </div>
+    {% endfor %},
+
+{%endblock%}

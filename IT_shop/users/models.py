@@ -10,6 +10,7 @@ class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete = models.CASCADE)
 	description = models.CharField(max_length = 100, blank =True)
 	photo = models.ImageField(upload_to = 'user/%Y/%m/%d/', blank = True)
+	#cart = models.OneToOneField("shop.Cart", on_delete = models.PROTECT, blank = True, null = True)
 	def get_absolute_url(self):
 		return reverse('profile', kwargs = {'profile_slug': self.slug})
 	def __str__(self):
