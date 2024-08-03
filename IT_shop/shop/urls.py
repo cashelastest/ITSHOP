@@ -17,5 +17,14 @@ urlpatterns = [
     path('product/<int:pk>/delete/', views.DeleteProduct.as_view(), name='product_delete'),
     path('my-products/', views.MyProducts.as_view(), name='my_products'),
     path('products/by/<slug:profile_slug>/', views.SellerProducts.as_view(), name = 'seller_products'),
-    path('contact/', views.contact, name = 'contact')
+    path('contact/', views.contact, name = 'contact'),
+    path('like/<int:product_id>/', views.like_product, name='like_product'),
+    path('dislike/<int:product_id>/', views.dislike_product, name='dislike_product'),
+    path('like/<int:product_id>/', views.like_product, name='like_product'),
+    path('dislike/<int:product_id>/', views.dislike_product, name='dislike_product'),
+
+    path('like/<int:product_id>/', views.like_product, name='like_product'),
+    path('dislike/<int:product_id>/', views.dislike_product, name='dislike_product'),
+    path('product-state/<int:product_id>/', views.product_state, name='product_state'),
+
 ]

@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect,get_object_or_404, HttpResponse
+
 from django.views.generic import *
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import *
@@ -9,6 +11,61 @@ from django.http import JsonResponse
 from django.db.models import Count
 from django.http import Http404
 from django.core.mail import EmailMessage, send_mail
+
+
+
+
+@login_required
+@require_POST
+def like_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    user = request.user
+
+    existing_like = ProductLike.objects.filter(user=user, product=product).first()
+    if existing_like:
+        existing_like.delete()
+    else:
+        ProductDislike.objects.filter(user=user, product=product).delete()
+        ProductLike.objects.create(user=user, product=product)
+    
+    product.likes = ProductLike.objects.filter(product=product).count()
+    product.dislikes = ProductDislike.objects.filter(product=product).count()
+    is_liked = ProductLike.objects.filter(user=user, product=product).exists()
+    print(is_liked)
+    is_disliked = ProductDislike.objects.filter(user=user, product=product).exists()
+
+    product.save()
+    
+    return JsonResponse({'likes': product.likes, 'dislikes': product.dislikes,'is_liked': is_liked,'is_disliked': is_disliked,})
+
+@login_required
+@require_POST
+def dislike_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    user = request.user
+
+    existing_dislike = ProductDislike.objects.filter(user=user, product=product).first()
+    if existing_dislike:
+        existing_dislike.delete()
+    else:
+        ProductLike.objects.filter(user=user, product=product).delete()
+        ProductDislike.objects.create(user=user, product=product)
+    
+    product.likes = ProductLike.objects.filter(product=product).count()
+    product.dislikes = ProductDislike.objects.filter(product=product).count()
+    product.save()
+    
+    return JsonResponse({'likes': product.likes, 'dislikes': product.dislikes})
+
+@login_required
+def product_state(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    user = request.user
+    
+    has_liked = ProductLike.objects.filter(user=user, product=product).exists()
+    has_disliked = ProductDislike.objects.filter(user=user, product=product).exists()
+    
+    return JsonResponse({'hasLiked': has_liked, 'hasDisliked': has_disliked})
 @login_required
 def home(request):
     name = request.GET.get('name')
@@ -46,22 +103,11 @@ def home(request):
         dislikes_count=Count('dislikes')
     ).order_by('-likes_count')
     
-    # Prepare like and dislike icons for each product
-    like_dislike_icons = {}
-    for product in products:
-        like_icon = request.user in product.likes.all()
-        print(like_icon)
-        dislike_icon = request.user in product.dislikes.all()
-        like_dislike_icons[product.id] = {
-            'like_icon': like_icon,
-            'dislike_icon': dislike_icon
-        }
-    
     return render(request, 'shop/home.html', {
         'products': products,
         'profile': profile,
         'cats': cats,
-        'like_dislike_icons': like_dislike_icons
+
     })
 class AddProduct(LoginRequiredMixin,CreateView):
 	form_class = AddProduct

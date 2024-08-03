@@ -27,32 +27,32 @@ class Product(models.Model):
 
 	likes = models.ManyToManyField(User, blank=True, related_name='likes')
 	dislikes = models.ManyToManyField(User, blank=True, related_name='dislikes')
-	def toggle_like(self, user):
-		if user in self.likes.all():
-			self.likes.remove(user)
-		else:
-			self.likes.add(user)
-		self.save()
+	likes = models.PositiveIntegerField(default=0)
+	dislikes = models.PositiveIntegerField(default=0)
 
-	def toggle_dislike(self, user):
-		if user in self.dislikes.all():
-			self.dislikes.remove(user)
-		else:
-			self.dislikes.add(user)
-		self.save()
-
-	def likes_count(self):
-		return self.likes.count()
-
-	def dislikes_count(self):
-		return self.dislikes.count()
-
+	def __str__(self):
+		return self.name
 	def save(self, *args, **kwargs):
 		if not self.slug:
 			self.slug = slugify(self.name)
 		super().save(*args, **kwargs)
 	def get_absolute_url(self):
 		return reverse('product', kwargs={'product_slug': self.slug})
+class ProductLike(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+	class Meta:
+		unique_together = ('user', 'product')
+
+class ProductDislike(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+	class Meta:
+		unique_together = ('user', 'product')
+
+
 class ProductImages(models.Model):
 	product = models.ForeignKey(Product, on_delete=models.CASCADE, blank = True, null = True,related_name='images')
 	photo = models.ImageField(upload_to = 'products/%Y/%m/%d', verbose_name = "")
