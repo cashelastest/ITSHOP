@@ -1,7 +1,7 @@
 {% extends 'shop/base.html'%}
 {%block content%}
 
-
+<div class= add_product>
 
 <form method = 'Post'>
 	
@@ -14,8 +14,9 @@
 <p>
 <label for = "{{ f.id_for_label}}"><b>{{f.label}}:</b></label></p>{{f}}<p align="center"></p>
 {%endfor%}
-		<p align="right"><button type="submit" class="user_btn_Pc{{request.user_agent.is_pc}}"> <b>Отправить</b></button></p>
-	</div></nav>
-	<p><a href="{%url 'users:password_reset'%}">forget</a></p>
-</form>
+		<p align="right"> <b><button id = search>Отправить</button></b></p>
+	</div></nav>Забули юзернейм чи пароль?<b>
+	<p><a href="{%url 'users:password_reset'%}">&emsp;Відновити пароль</a></p></b>
+	<p><a href="{%url 'users:sign_up'%}">Новий користувач? <p>&emsp;<b>Реєстрація...</p></a></p></b>
+</form></div>
 {%endblock%}

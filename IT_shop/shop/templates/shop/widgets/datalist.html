@@ -1,0 +1,5 @@
+<select name="category" class="charfield" placeholder="Виберіть категорію">
+    {% for category in widget.datalist %}
+        <option value="{{ category }}">{{ category.name }}</option>
+    {% endfor %}
+</select>

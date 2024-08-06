@@ -3,15 +3,19 @@
 
 
 
-
-		{% if user.photo%}
-		<p><img src="{{user.photo.url}}" width="200px" height="200px"></p>
+<div class="add_product">
+		{% if profile.photo%}
+		<p><img src="{{profile.photo.url}}"></p>
 		{%else%}
-		<p><img src="{{default_image}}" width="200px" height="200px"></p>
+		<p><img src="{{default_image}}"></p>
 		{%endif%}
-<form action="" enctype="multipart/form-data" method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Save" />
-</form>
-<p><a href="{% url 'users:password_change'%}">Change</a></p>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {%for f in form%}
+
+<p><b><label for="{{f.id_for_label}}">{{f.label}}</b></p><p>{{f}}</p>
+{%endfor%}<b><br>
+    <button type="submit" id=search >Зберегти зміни</button>
+</form><br><br><h3>
+<a href="{% url 'users:password_change'%}">Змінити пароль</a></b></h3></div>
 {%endblock%}

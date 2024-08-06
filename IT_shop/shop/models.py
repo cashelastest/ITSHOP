@@ -17,35 +17,18 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-	name =models.CharField(max_length = 255, verbose_name ='name')
+	name =models.CharField(max_length = 255, verbose_name ='Назва товару:')
 	slug= models.SlugField(max_length = 255, unique=True, db_index = True, verbose_name = "URL")
-	content = models.TextField(verbose_name="description")
+	content = models.TextField(verbose_name="Опис товару: ")
 	price = models.IntegerField(verbose_name = 'price')
-	category = models.ManyToManyField(Category, verbose_name = "Категория")
+	category = models.ForeignKey(Category,on_delete = models.PROTECT, verbose_name = "Категорія")
 	seller = models.ForeignKey("users.Profile", on_delete = models.PROTECT, blank = True, null = True)
+	is_banned = models.BooleanField(blank = True, null = True, default =False)
 	is_published = models.BooleanField(blank = True, null = True,default=False)
-
 	likes = models.ManyToManyField(User, blank=True, related_name='likes')
-	dislikes = models.ManyToManyField(User, blank=True, related_name='dislikes')
-	def toggle_like(self, user):
-		if user in self.likes.all():
-			self.likes.remove(user)
-		else:
-			self.likes.add(user)
-		self.save()
-
-	def toggle_dislike(self, user):
-		if user in self.dislikes.all():
-			self.dislikes.remove(user)
-		else:
-			self.dislikes.add(user)
-		self.save()
-
-	def likes_count(self):
-		return self.likes.count()
-
-	def dislikes_count(self):
-		return self.dislikes.count()
+	dislikes = models.ManyToManyField(User, blank=True,related_name='dislikes')
+	def __str__(self):
+		return self.name
 
 	def save(self, *args, **kwargs):
 		if not self.slug:
@@ -54,9 +37,9 @@ class Product(models.Model):
 	def get_absolute_url(self):
 		return reverse('product', kwargs={'product_slug': self.slug})
 class ProductImages(models.Model):
-	product = models.ForeignKey(Product, on_delete=models.CASCADE, blank = True, null = True,related_name='images')
-	photo = models.ImageField(upload_to = 'products/%Y/%m/%d', verbose_name = "")
-	caption = models.CharField(max_length=100, blank=True, null = True)
+	product = models.ForeignKey(Product, on_delete=models.CASCADE,related_name='images')
+	photo = models.ImageField(upload_to = 'products/%Y/%m/%d', blank=False, null=False, verbose_name="")
+
 class Cart(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cart_items')
@@ -64,4 +47,3 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"{self.product.name} ({self.quantity})"
-

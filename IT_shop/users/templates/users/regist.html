@@ -2,7 +2,8 @@
 {%block content%}
 
 
-
+<div class="add_product">
+	<b>
 <form method = 'Post'>
 	
 	{%csrf_token%}<nav align ='center'>
@@ -13,7 +14,13 @@
 <p>
 <label for = "{{ f.id_for_label}}"><b>{{f.label}}:</b></label></p>{{f}}<p align="center"></p>
 {%endfor%}
-		<p align="right"><button type="submit" class="user_btn_Pc{{request.user_agent.is_pc}}"> <b>Отправить</b></button></p>
+Вже зареєстровані? &emsp;&emsp;
+<a href="{%url 'users:login'%}">
+<h3>Логін...</h3></a>
+		<p align="right"><button type="submit" id="search"> Отправить</button></p>
+
 	</div></nav>
 </form>
+
+</b></div>
 {%endblock%}

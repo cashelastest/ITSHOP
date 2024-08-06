@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATICFILES_DIRS = [
@@ -34,6 +35,10 @@ ALLOWED_HOSTS = []
 MONOBANK_TOKEN = 'ubPUNjHNB2UU6qSZ0ejg627uxwzfIEsb7OTNXp-WebEU'
 
 # Application definition
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -44,7 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop.apps.ShopConfig',
     'users.apps.UsersConfig',
+
     'monobank.apps.MonobankConfig',
+    'searchableselect',
 ]
 
 MIDDLEWARE = [
@@ -95,16 +102,10 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'users.validator.PasswordValidator',
+        'OPTIONS': {
+            'sponsor': '_Mr_Rac_',  # Change 'yourword' to the word you want to forbid
+        }
     },
 ]
 
@@ -130,8 +131,8 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_USER_IMAGE = MEDIA_URL+'user/default.png'
 
 

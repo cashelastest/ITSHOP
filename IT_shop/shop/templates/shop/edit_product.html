@@ -1,17 +1,28 @@
 {% extends 'shop/base.html' %}
 {% load static %}
 {% block content %}
+<div class="add_product">
+    <div class= 'Edit'>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+
+
+
+    {%for f in form%}
+
+<p><b><label for="{{f.id_for_label}}">{{f.label}}</b></p><p>{{f}}</p>
+{%endfor%}
+
+
     {{images.management_form}}
 {% for f in images %}
     <b><p>{{ f }}</p></b>
 {% endfor %}
-
-<button type="submit">сщхранить</button>
+<br>
+<button id = search type="submit">Зберегти зміни</button>
 </form>
-
+</div>
+</div>
 
 {% endblock %}
 

@@ -1,10 +1,39 @@
-{% extends 'users/base.html'%}
+{% extends 'shop/base.html'%}
+{%load static%}
 {%block content%}
 hiee
-{{profile.user.username}}
-{%if song.Image%}
+    <div class="add_product">
+{%if profile.photo%}
 <p>
 <img src="{{profile.photo.url}}"></p>
-
+{%else%}
+<img id = 'avatar' src="{%static 'shop/Images/default.png'%}" alt = "photo">
 {%endif%}
+<h2><b>
+<p>
+&ensp;{{profile.user.last_name}} 
+{{profile.user.first_name}}</p></h2><h3>
+<p></b>
+Юзернейм: <b><p>&emsp;{{profile.user.username}}</p></p></b>
+Пошта: <p><b>&emsp;{{profile.user.email}}</b></p>
+	<p>Про себе:</p><b>
+<p>
+
+&ensp;{{profile.description}}
+</p></b></h3>
+<div id="edit-profile" align="right">
+{%if profile.user ==  request.user%}
+    <a href = '{%url "users:edit_profile"%}' id="search" >
+        <img src="{% static 'shop/Icons/walking-cat.png' %}" width="50px" height="50px" alt="Cat Icon" >
+        Змінити профіль
+    </a>
+{%else%}
+    <a href = '{%url "seller_products" profile.slug%}' id="search" >
+        <img src="{% static 'shop/Icons/walking-cat.png' %}" width="70px" height="70px" alt="Cat Icon" >
+        Товари цього продавця
+    </a>
+{%endif%}
+
+
+</div></div>
 {%endblock%}

@@ -7,27 +7,58 @@ HI!!!
 <input type="number" name="price_max" id="max_price">
 <button type="submit">Sub</button></form>
 
+<div class="search">
+<br><br>
+<form method="get">
+    Пошук: <input type="text" name="name" class="charfield" placeholder=" Шукати за назвою продукту">
+    <p>
+    Ціна від: <input type="number" name="price_min" class="charfield" id="min_price" placeholder=" Початкова ціна">
+    <br>
+    До: <br><input type="number" name="price_max" class="charfield" id="max_price" placeholder=" Кінцева ціна">
+</p>
+    В категорії: <input list="cat" name="category" class="charfield" placeholder=" Шукати за категорією">
+    <datalist id="cat">
+        {% for cat in cats %}
+        <option value="{{ cat.name }}">
+        {% endfor %}
+    </datalist>
+<br>
+<br>
+   <p align="right" > <button type="submit" id="search">Шукати</button></p>
+</form>
+</div><div class="products">
+    <br><br>
     {% for product in products %}
-        <div>
+        <div class="product">
+<div class="info">
+        <div>Name:
             <h2>{{ product.name }}</h2>
-            <p>{{ product.description }}</p>
-            {{product.price}}
-            <div>
-                {{product.is_published}}
+            Опис:
+            <p><b>{{ product.content }}</b></p>
+            <p>Ціна: <b>{{product.price}}₴</b></p>
+            <div><p>Фото:</p>
 
                 {% for image in product.images.all %}
                     <div>
-                        <img src="{{ image.photo.url }}" alt="{{ image.caption }}">{{image.image.url}}
-                        <p>{{ image.caption }}</p>
+                        <img src="{{ image.photo.url }}" alt="{{ image.caption }}" width = 400px>{{image.image.url}}
+                        <p></p>
                     </div>
                 {% endfor %}
-                <a href="{%url 'add_to_cart' product.id%}">ADD </a>
-            </div>
+            </div></div></div>
 
-
+<center>
+        <table>
+            <tr><td>
+                <div class = 'downBar'>
+        <a href="{% url 'ban' product.id %}"><b>Ban</b></a></div></td>
+        <td><div class = 'downBar'>
+        <a href="{% url 'accept' product.id %}"><b>Одобрить</b></a></div></td></tr>
+        
+  
+    </table></center>
 
                             
-<button><a href = '{%url "moder_accept" product.id%}'>Сохранить</a></button>
+
 
         </div>
     {% endfor %}

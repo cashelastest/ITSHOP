@@ -1,5 +1,7 @@
 
+
 $(document).ready(function(){
+
 	var value = 0
 
 	$("nav #id_images-1-photo").hide("fast");

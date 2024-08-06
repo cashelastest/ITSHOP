@@ -1,11 +1,19 @@
 {% extends 'shop/base.html'%}
+{% load static %}
 {%block content%}
 HI!!!
+
+<div class="add_product">
 <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="text" name="title" placeholder="Title" required><br>
-    <textarea name="content" placeholder="Content" required></textarea><br>
-    <input type="file" name="image"><br>
-    <button type="submit">Submit</button>
-</form>
+    {% csrf_token %}<b>
+            <label for="content" >Дууууу-же коротко про проблему:</label><br>
+    <input type="text" name="title" class="charfield" placeholder="Назва проблеми" required><br><br>
+    <label for="content" >Опис багу:</label><br>
+    
+    <textarea name="content" class="textarea" placeholder="Опишіть проблему з якою зіткнулися" required></textarea><br><br>
+    Прикріпити фото можна тут:<br>
+    <img src = '{%static "shop/Icons/lying_cat.png"%}' width="150px" height='150px'>
+    <input type="file" name="image" id="contact_file"><br><br><br>
+    <button id = 'search'type="submit">Отправить</button></b>
+</form></div>
 {%endblock%}

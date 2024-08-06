@@ -1,16 +1,48 @@
 {% extends 'shop/base.html'%}
 {%block content%}
-{{product.name}}
+<div class = 'container'>
+<div class="user_info"><p>
+    <h2>
+    <b>
+    {{product.seller.user.last_name}} 
+    {{product.seller.user.first_name}}<p></h2>
+    <img src='{{product.seller.photo.url}}' width="300px"></p>
+    <p>На нашому сайті з {{product.seller.user.date_joined|date:"d.m.Y"}}</p>
+    <p>Зв'язок:</p>
+    <p>{{product.seller.user.email}}</p>
+
+
+</p>
+<br>
+<p align="right"><a href="{%url 'users:ShowProfile' product.seller.slug%}"><button id="search"><b>Докладніше</b></button></a>&emsp;&emsp;&emsp;</p>
+    </b>
+
+
+</div>
+<div class="add_product">
+    <p>
+<h1>
+{{product.name}}</h1></p>
 {%for image in product.images.all%}
-                    <div>
-                        <p><img src="{{ image.photo.url }}" alt="{{ image.caption }}"></p>
+                    
+                        <p><img src="{{ image.photo.url }}" alt="{{ image.caption }}" width="400px"></p><br>
 
-                    </div>
+                    
                     {%endfor%}
+<p align="left">Ціна: <p align="left"><b>&ensp;₴{{product.price}}</b></p></p>
+<p align="left">Опис: <p align="left"><b>&ensp;{{product.content}}</b></p></p>
 
-<p>Описание: <b>{{product.content}}</b></p>
 
-<p>Цена: <b>{{product.price}}</b></p>
-<p>Продавец: <b>{{product.seller}}</b></p>
-<a href="{%url 'add_to_cart' product.id%}">ADD TO CART</a>
+
+
+
+{%if profile.user != product.seller.user%}
+
+<a href="{%url 'add_to_cart' product.id%}"><button id = 'search'>Додати в кошик</button></a>
+{%else%}<a href="{%url 'product_edit' product.id%}"><button id="search">Змінити</button></a>&emsp;&emsp;&emsp;
+<a href="{%url 'product_delete' product.id%}"><button id="search">Видалити</button></a>
+{%endif%}
+</div>
+</div>
+
 {%endblock%}

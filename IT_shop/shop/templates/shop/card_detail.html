@@ -1,15 +1,23 @@
 {%extends 'shop/base.html'%}
+{%load static%}
 {%block content%}
-    <h1>Your Cart</h1>
-    <ul>
-        {% for item in cart_items %}
-            <li>{{ item.product.name }} - {{ item.quantity }} - ${{ item.product.price }} <a href = "{%url 'remove_from_cart' item.pk%}">Delete product</a></li>
+    <div class="add_product">
+    <h1>Кошик</h1>
+<b>
+    <ul class="summary">
+        {%if total == 0%}<br>
+        <p class="summary"><h3>Ваш Муркошик порожній</p><br>
+            <a href="{%url 'home'%}">*Купити щось замурчательне*</h3></a>
+        {%else%}
+        {% for item in cart_items %}<br>
+            <li>{{ item.product.name }} - {{ item.quantity }} - ${{ item.product.price }} <a href = "{%url 'remove_from_cart' item.pk%}">Delete product</a></li><br>
         {% endfor %}
+
     </ul>
-    <p>Total: ${{ total }}</p>
+    <p class="summary"><h3>Total: {{ total }}₴</h3></p>
 
-    <p><a href="{% url 'mono:create_payment' %}">Pay with mono</a></p>
+    <p><div  id= 'pay'><a href="{% url 'mono:create_payment' %}">Онлайн оплата карткою&emsp;&emsp; <img src = '{%static "shop/Icons/plata_light_bg.svg"%}'with = 64px height="32px" id="pay-img"></a></div></p>
     
-    <a href="{%url 'home'%}">continiue shopping</a>
-
+{%endif%}
+</div></b>
 {%endblock%}

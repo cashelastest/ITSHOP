@@ -1,23 +1,33 @@
 {%extends 'shop/base.html'%}
 {% load static %}
+
 {%block content%}
-<form action="" enctype="multipart/form-data" method="post">
+
+<p align="center">
+<div class="add_product">
+<form action="" enctype="multipart/form-data" method="post">{%csrf_token%}
 {%for f in form%}
-{%csrf_token%}
+
 <p><b><label for="{{f.id_for_label}}">{{f.label}}</b></p><p>{{f}}</p>
 {%endfor%}
+
+
+
 {{images.management_form}}
-    <b>Add photo:</b>
+    <b>Додати  фото товару:</b>
     {% for form in images %}
 
 <nav><p>{{form}}</p></nav>
     {% endfor %}
-    <button id = 'add'>add</button>
-    <button id = 'del'>del</button>
 
 
-<p align="right"><button type="submit" class="user_btn_Pc{{request.user_agent.is_pc}}"> <b>Отправить</b></button></p>
+
+<p align="right"><button type="submit" id='search'> <b>Отправить</b></button></p>
 </form>
+    <b class= 'reg-photo' id = 'add'>Додати ще фотографію</b>
+    <b class = 'reg-photo' id = 'del'>Видалити останню</b>
+</div></p>
+
 {%endblock%}
 
 

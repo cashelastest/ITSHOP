@@ -1,0 +1,25 @@
+{%extends 'shop/base.html'%}
+{% load static %}
+
+{%block content%}
+
+<p align="center">
+<div class="add_product">
+	{%if request.user.is_staff%}
+<form action="" enctype="multipart/form-data" method="post">{%csrf_token%}
+{%for f in form%}
+
+<p><b><label for="{{f.id_for_label}}">{{f.label}}</b></p><p>{{f}}</p>
+{%endfor%}
+
+
+
+<p align="right"><button type="submit" id='search'> <b>Додати</b></button></p>
+</form>
+{%else%}<p><b>
+Тут котики модератори виконують свою важливу робота, щоб стати таким котиком пишіть: trew5804@gmail.com</b></p>
+<a href='{%url "home"%}'><button id="search">Повернутися на головну</button></a>
+
+{%endif%}
+</div></p>
+{%endblock%}

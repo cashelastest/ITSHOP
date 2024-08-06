@@ -1,25 +1,392 @@
-body{
+html{
+	    height: 100%;
 	color:black;
-	background-color: #F0E5FF;
+background-color: #F0E5FF;
+    font-family: 'Comic Neue', sans-serif;
+
+    background-size: cover;
+    background-position: center;
+
 
 }
+.downer{
+	height: 200px;
+	width: 100%;
+
+}
+
 .products{
 	display: flex;
 	flex-wrap: wrap;
 	padding: 10px;
 	width: 90%;
-	align-items: center; 
 	justify-content: center;
+	margin-left: 300px;
+	margin-right: 20px;
 
 
 
 }
-.product{
-	margin: 15px;
+.info {
+	margin-bottom: 4px;
 	background-color: #D4C2FC;
-	width: 25%;
+	height: 640px !important;
 	font-size: 20px;
-	border: solid #481352 3px;
+	border: ridge #481352 3px;
 	border-radius: 15px;
+	text-align: center;
 
+
+}
+.product{
+	width: 500px;
+	font-size: 20px;
+		border: ridge #481352 2px;
+	border-radius: 15px;
+	margin-left: 25px;
+	margin-top: 20px;
+
+
+	background-color: #D4C2FC;
+}
+.rating{
+	background-color: transparent;
+	margin-right: 10px;
+	margin-bottom: 4px;
+	width: 15%;
+	height: 28px;
+	padding-top: 3px;
+		font-size: 20px;
+	text-decoration: none;
+	border: none;
+	box-shadow: none;
+
+
+}
+.likes{
+		text-align: right;
+}
+b{
+	padding-bottom: 4px;
+	padding-top: 2px;
+
+
+}
+.downBar {
+    border-radius: 5px;
+    border: 3px solid #F0E5FF;
+    background-color: #D4C2FC;
+    padding: 5px;
+    margin-bottom: 3px;
+    border-collapse: collapse;
+    transition: background-color 0.6s ease-in-out, transform 0.6s ease-in-out, border-radius 0.6s ease-in-out;
+    width: 210px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.downBar:hover {
+    background-color: #F0E5FF;
+    border-radius: 10px;
+    transform: scale(1.1);
+
+}
+.product table{
+	height: 50px;
+	white-space: nowrap;
+	text-align: center;
+	width: 70%;
+
+}
+.full{
+	height: 100px;
+	white-space: nowrap;
+	text-align: center;
+	width: 70%;
+
+}
+.product table b{
+	font-size: 20px;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+.topnav {
+
+	text-align: center;
+
+	font-size: 26px;
+	color: black;
+	width: 800px;
+
+	justify-content: center;
+	display: block;
+	height: 90px;
+	  margin: auto;
+}
+.topnav a{
+
+	text-decoration: none;
+	color: black;
+''
+	padding-right: 30px;
+	padding-left: 30px;
+	padding-top: 20px;
+	  text-align: center;
+	  height:60px;
+
+}
+
+#avatar{
+ 
+  
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 5px solid black;
+  text-align: right;
+    vertical-align: sub;
+    margin-right: 20px;
+    margin-top: 20px;
+
+
+}
+
+.avatar{
+	     text-align: center;
+
+
+
+
+}
+#cart{
+   vertical-align: sup;
+   text-align: center;
+}
+.topnav_all{
+background: url('/static/shop/Images/top.png') fixed;
+background-position: top left;
+background-repeat: no-repeat;
+background-size: auto;
+    background-size: cover;
+    background-position: center;
+    height: 250px;
+	display: flex;
+flex-wrap: wrap;
+
+width: 98%;
+border-radius: 20px;
+
+
+
+}
+
+.charfield {
+    width: 250px;
+    transition: width 1s ease-in-out;
+    border: none;
+    background-color: #DCD0FF;
+    border-bottom: 2px solid black;
+    border-radius: 5px;
+    height: 35px;
+    font-size: 17px;
+}
+.charfield:not(:placeholder-shown){
+	background-color: #8de8fa;
+}
+
+.textarea:not(:placeholder-shown){
+	background-color: #8de8fa;
+}
+.charfield:focus {
+    width: 300px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid black;
+}
+.textarea:focus{
+	    border:2px solid black ;
+    outline: none;
+        width: 600px;
+
+}
+.textarea{
+	 width: 400px;
+    transition: width 1s ease-in-out;
+    border: none;
+    background-color: #DCD0FF;
+    border-bottom: 2px solid black;
+    border-radius: 5px;
+    height: 200px;
+    font-size: 17px;
+}
+.search{
+	width: 250px;
+	float: left;
+	position: absolute;
+	margin-left: 20px;
+	height: 100%;
+}
+
+#search{
+	  transition-duration: 0.4s;
+	  background-color: transparent;
+	  color: black;
+
+	  border: 3px #481352 solid;
+	  border-radius: 8px;
+	  font-size: 18px;
+}
+
+
+
+#search:hover {
+  background-color: #481352;
+  border: 3px #481352 solid; 
+  color: white !important;
+}
+
+
+.add_product{
+
+	width: 55%;
+	margin: auto;
+	margin-top: 30px;
+	position: relative;
+	border: ridge #481352 2px;
+	border-radius: 15px;
+	padding: 30px;
+
+}
+
+
+.reg-photo{
+	transition-duration: 0.4s;
+		  border: 3px #481352 solid;
+	  border-radius: 10px;
+	  	  font-size: 18px;
+	  	  padding-left: 10px;
+	  	  padding-right: 10px;
+
+}
+
+.reg-photo:hover{
+
+  background-color: #481352;
+  	  border: 3px #481352 solid; 
+  	  color: white;
+  	  cursor: pointer;
+}
+
+
+#search{
+	margin-left: 20px;
+}
+
+
+#pay{
+	font-size: 22px;
+	border: 4px solid black;
+	height: 50px;
+	width: 470px;
+	text-align: center;
+			padding-top: 5px;
+			border-radius: 8px;
+
+
+
+}
+#pay-img{
+	vertical-align:sub;
+		padding-top: 6px;
+
+}
+
+
+#edit-profile #search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    background-color: #F0E5FF;
+    cursor: pointer;
+    color: black; /* Ensure text color is set to contrast with the background */
+    padding: 10px; /* Optional: add some padding for a better look */
+    transition: background-color 0.7s, color 0.7s;
+    width: 200px; /* Smooth transition */
+}
+
+#edit-profile #search:hover {
+    background-color: #481352;
+
+    color: white;
+}
+
+
+.user_info{
+	width: 450px;
+	float: right;
+	font-size: 23px;
+	text-align: center;
+	height: 100%;
+			border: ridge #481352 2px;
+	border-radius: 15px;
+	margin-right: 20px;
+
+}
+.Edit .add_product{
+	margin-left: 300px;
+	width: 700px;
+	text-align: center;
+				border: ridge #481352 3px;
+}
+
+.Edit #id_name:focus {
+	width: 300px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid black;
+}
+.Edit #id_name,#id_price,#id_category {
+    width: 250px;
+    transition: width 1s ease-in-out;
+    border: none;
+    background-color: #DCD0FF;
+    border-bottom: 2px solid black;
+    border-radius: 5px;
+    height: 35px;
+    font-size: 17px;
+}
+.Edit #id_name,#id_price,#id_category:not(:placeholder-shown){
+	background-color: #8de8fa;
+}
+
+
+.Edit #id_content:not(:placeholder-shown){
+	background-color: #8de8fa;
+}
+.Edit #id_content:focus{
+	    border:2px solid black ;
+    outline: none;
+        width: 600px;
+
+}
+.Edit #id_content{
+	 width: 400px;
+    transition: width 1s ease-in-out;
+    border: none;
+    background-color: #DCD0FF;
+    border-bottom: 2px solid black;
+    border-radius: 5px;
+    height: 200px;
+    font-size: 17px;
+}
+.container .add_product{
+	margin-left: 300px;
+	width: 700px;
+	text-align: center;
+				border: ridge #481352 3px;
 }

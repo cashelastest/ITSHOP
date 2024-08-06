@@ -1,12 +1,23 @@
 {% extends 'shop/base.html' %}
 {% block content %}
 <h2>Вы уверены, что хотите удалить продукт "{{ product.name }}"?</h2>
-<p>Описание: {{ product.content }}</p>
-<p>Продавец: {{ product.seller }}</p>
+<div class = 'container'>
 
+<div class="add_product">
+    <p>
+<h1>
+{{product.name}}</h1></p>
+{%for image in product.images.all%}
+                    
+                        <p><img src="{{ image.photo.url }}" alt="{{ image.caption }}" width="400px"></p><br>
+
+                    
+                    {%endfor%}
+<p align="left">Ціна: <p align="left"><b>&ensp;₴{{product.price}}</b></p></p>
+<p align="left">Опис: <p align="left"><b>&ensp;{{product.content}}</b></p></p>
 <form method="post">
     {% csrf_token %}
-    <button type="submit">Удалить</button>
-    <a href="{% url 'home' %}">Отмена</a>
-</form>
+    <button id= search  type="submit">Видалити</button>&emsp;
+    <a href="{% url 'home' %}">Скасувати</a>
+</form></div>
 {% endblock %}

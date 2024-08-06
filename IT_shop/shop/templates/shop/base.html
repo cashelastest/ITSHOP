@@ -3,18 +3,44 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
 	<link rel="stylesheet" type="text/css" href="{% static 'shop/css/main.css' %}">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>SUPER</title>
 
-</head>
 
-ok
+<center>
+<div class="topnav_all">
+{% if user.is_authenticated %}
+ <div class="topnav"><b>
+  <a class="active" href="{% url 'home' %}"><img src="{%static 'shop/Icons/noun-cat-6850757.png'%}" width="50px" height="50px" id = 'cat'>Home</a>
+  <a href="{% url 'add_product' %}">Додати</a>
+  <a href="{% url 'contact' %}">Зв'язок</a>
+  <a href="{% url 'my_products' %}">Мої товари</a>
+  <a href="{% url 'users:logout' %}">Вихід</a>
 
 
-</body>
-</html>
+</b></div>
+  <div class="avatar">
+  	  <a href="{% url 'cart_detail' %}" id = "cart"><img src="{%static 'shop/Icons/cart4.svg'%}" width="48px" height="48px" id = 'cart'></a>    	&emsp;&emsp; 
+  	  {%if profile.photo%}
+<a href="{% url 'users:ShowProfile' profile.slug%}"align ="right"><img id = 'avatar' src="{{profile.photo.url}}" alt = "ava"></a> 
+{%else%}
+<a href="{% url 'users:edit_profile' %}"align ="right"><img id = 'avatar' src="{%static 'shop/Images/default.png'%}" alt = "photo"></a> 
+{%endif%}
+</div>
+
+
+{%else%}
+ <div class="topnav"><b>
+  <a class="active" href="{% url 'users:login' %}"><img src="{%static 'shop/Icons/noun-cat-6850757.png'%}" width="50px" height="50px" id = 'cat'>Логін</a>
+  <a href="{% url 'users:sign_up' %}">Реєстрація</a></b></div>
+{%endif%}
+
+</div> </center>
+
 {%block content%}
 {%endblock%}
 
@@ -23,3 +49,5 @@ ok
 <script type="text/javascript" src={% static "shop/js/jquery-3.7.1.min.js" %}></script>
 <script type="text/javascript" src={% static "shop/js/script.js" %}></script>
 {%endblock%}
+<p>
+<div class="downer"></div></p>
