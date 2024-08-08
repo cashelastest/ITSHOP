@@ -50,11 +50,12 @@ def register(request):
     if request.method == 'POST':
         form = RegisterUserForm(request.POST)
         if form.is_valid():
-            form.save()
-            Profile.objects.create(user=request.user)
+            user = form.save()
+            if not Profile.objects.filter(user=user).exists():
+                Profile.objects.create(user=user)
 
 
-            return redirect('home')
+            return redirect('users:login')
     else:
         form = RegisterUserForm()
     return render(request, 'users/regist.html', {'form': form})

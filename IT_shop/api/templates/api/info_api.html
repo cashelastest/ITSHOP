@@ -1,0 +1,34 @@
+{%extends 'shop/base.html'%}
+{%block content%}
+<div class="add_product">
+<h1>API docs</h1>
+<b>
+Register new user:<br>
+https://mrracon.pythonanywhere.com/api/v1/auth/users/<br>
+Потребує username, password
+<br><br><br>
+Get token:
+<br>
+http://127.0.0.1:8000/auth/token/login/
+needs username and password
+<br><br><br>
+Get product by user id:
+<br>
+http://127.0.0.1:8000/api/v1/products/<< id >>/user_products/
+<br><br><br>
+Get all products:<br>
+You can create new products if authenticated<br>
+http://127.0.0.1:8000/api/v1/products/
+<br>
+<br>
+<br>
+Get product by its id
+<br>
+You can change and delete product with seller token
+<br>
+http://127.0.0.1:8000/api/v1/products/<< id >>/
+<br><br>
+
+<br>You can get user by id<br>
+http://127.0.0.1:8000/api/v1/products/<< id >>/user_info/</div></b>
+{%endblock%}

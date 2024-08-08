@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'users.apps.UsersConfig',
     'rest_framework',
+    'api',
     'rest_framework.authtoken',
     'djoser',
     'monobank.apps.MonobankConfig',
@@ -102,12 +103,6 @@ DATABASES = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'users.validator.PasswordValidator',
-        'OPTIONS': {
-            'sponsor': '_Mr_Rac_',  # Change 'yourword' to the word you want to forbid
-        }
-    },
 ]
 
 

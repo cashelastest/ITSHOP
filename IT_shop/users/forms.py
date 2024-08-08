@@ -25,7 +25,7 @@ class RegisterUserForm(UserCreationForm):
     #last_name = forms.CharField(label = 'Прізвище', widget=forms.TextInput(attrs={'class':'charfield','placeholder':'Також РЕАЛЬНЕ прізвище'}))
     email = forms.EmailField(label = 'Пошта', widget=forms.EmailInput(attrs={'class':'charfield','placeholder':'Email'}))
     #photo = models.ImageField(upload_to='user/%Y/%m/%d', blank=True)
-    password1 = forms.CharField(label = 'Твой секретный ключик', widget = forms.PasswordInput(attrs={'class':'charfield', 'placeholder':"Пароль"}))
+    password1 = forms.CharField(label = 'Твій таємний ключик', widget = forms.PasswordInput(attrs={'class':'charfield', 'placeholder':"Пароль"}))
     password2 = forms.CharField(label = 'Повтори', widget = forms.PasswordInput(attrs={'class':'charfield', 'placeholder':"Повторіть пароль"}))
 
     class Meta:
@@ -34,7 +34,7 @@ class RegisterUserForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2')
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label = 'Юзернейм', widget = forms.TextInput(attrs ={'class':'charfield', 'placeholder':" Ваш юзернейм"}))
-    password = forms.CharField(label = 'Секретный ключик', widget = forms.PasswordInput(attrs={'class':'charfield','placeholder':"Пароль"}))
+    password = forms.CharField(label = 'Таємний ключик', widget = forms.PasswordInput(attrs={'class':'charfield','placeholder':"Пароль"}))
 
 class UserEditForm(ModelForm):
     username = forms.CharField(label='Юзернейм', widget=forms.TextInput(attrs={'class': 'charfield', 'placeholder':" Ваш юзернейм"}))
@@ -48,7 +48,7 @@ class UserEditForm(ModelForm):
         model = Profile
         fields = ('photo', 'description')
         labels = {
-            'photo': 'Фотография',  # Custom label in Russian
+            'photo': 'Фотографія',  # Custom label in Russian
         }
         widgets = {
             'photo': forms.FileInput(attrs={'class': 'file-input'}),

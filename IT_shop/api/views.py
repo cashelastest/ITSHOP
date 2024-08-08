@@ -7,6 +7,11 @@ from rest_framework import generics, viewsets
 from rest_framework.decorators import action
 from shop.models import *
 
+def api_info(request):
+	return render(request, 'api/info_api.html')
+
+
+
 class ProductViewSet(viewsets.ModelViewSet):
 	serializer_class= ProductSerializer
 	def get_queryset(self):
