@@ -52,7 +52,7 @@ def register(request):
         if form.is_valid():
             form.save()
             Profile.objects.create(user=request.user)
-            login(request, user)
+
 
             return redirect('home')
     else:

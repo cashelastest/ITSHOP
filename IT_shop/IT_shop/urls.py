@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', include('shop.urls')),
+    path('', include('api.urls')),
     path('accounts/', include('users.urls')),
     path('pay/', include('monobank.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

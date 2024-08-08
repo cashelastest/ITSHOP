@@ -145,7 +145,7 @@ def add_to_cart(request, product_id):
     cart_item.save()
     return redirect('cart_detail')
 
-@login_required
+@login_required(login_url='login')
 def cart_detail(request):
     cart_items = get_cart(request)
     profile= request.user.profile
@@ -398,7 +398,7 @@ def contact(request):
     return render(request, 'shop/contact.html', {'profile':profile})
 
 
-class CreateCategory(CreateView):
+class CreateCategory(LoginRequiredMixin,CreateView):
     model =Category
     form_class = CategoryForm
     template_name='shop/add_category.html'

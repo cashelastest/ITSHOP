@@ -5,6 +5,7 @@ from slugify import slugify
 from unidecode import unidecode
 from django.contrib.auth.models import User
 
+
 class Category(models.Model):
 	slug = models.SlugField(max_length = 255)
 	name = models.CharField(max_length=255)
@@ -22,7 +23,7 @@ class Product(models.Model):
 	content = models.TextField(verbose_name="Опис товару: ")
 	price = models.IntegerField(verbose_name = 'price')
 	category = models.ForeignKey(Category,on_delete = models.PROTECT, verbose_name = "Категорія")
-	seller = models.ForeignKey("users.Profile", on_delete = models.PROTECT, blank = True, null = True)
+	seller = models.ForeignKey(Profile, on_delete = models.PROTECT, blank = True, null = True)
 	is_banned = models.BooleanField(blank = True, null = True, default =False)
 	is_published = models.BooleanField(blank = True, null = True,default=False)
 	likes = models.ManyToManyField(User, blank=True, related_name='likes')

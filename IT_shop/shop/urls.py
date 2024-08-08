@@ -21,5 +21,5 @@ urlpatterns = [
     path('my-products/', views.MyProducts.as_view(), name='my_products'),
     path('products/by/<slug:profile_slug>/', views.SellerProducts.as_view(), name = 'seller_products'),
     path('contact/', views.contact, name = 'contact'),
-    path('add-category/', views.CreateCategory.as_view(), name = 'add_product'),
+    path('add-category/', views.CreateCategory.as_view(), name = 'add_category'),
 ]

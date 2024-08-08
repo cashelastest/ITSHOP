@@ -49,9 +49,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop.apps.ShopConfig',
     'users.apps.UsersConfig',
-
+    'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
     'monobank.apps.MonobankConfig',
-    'searchableselect',
 ]
 
 MIDDLEWARE = [
@@ -134,6 +135,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_USER_IMAGE = MEDIA_URL+'user/default.png'
+
+
+
+
+REST_FRAMEWORK={
+    'DEFAULT_RENDERER_CLASSES':[
+    'rest_framework.renderers.JSONRenderer',
+    'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES':[
+    'rest_framework.authentication.TokenAuthentication',
+    'rest_framework.authentication.BasicAuthentication',
+    'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
+
 
 
 
