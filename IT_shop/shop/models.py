@@ -28,6 +28,7 @@ class Product(models.Model):
 	is_published = models.BooleanField(blank = True, null = True,default=False)
 	likes = models.ManyToManyField(User, blank=True, related_name='likes')
 	dislikes = models.ManyToManyField(User, blank=True,related_name='dislikes')
+	photo = models.ImageField(upload_to='products/%Y/%m/%d', blank=False, null=True, verbose_name="Фото товара")
 	def __str__(self):
 		return self.name
 
@@ -37,10 +38,10 @@ class Product(models.Model):
 		super().save(*args, **kwargs)
 	def get_absolute_url(self):
 		return reverse('product', kwargs={'product_slug': self.slug})
+
 class ProductImages(models.Model):
 	product = models.ForeignKey(Product, on_delete=models.CASCADE,related_name='images')
 	photo = models.ImageField(upload_to = 'products/%Y/%m/%d', blank=False, null=False, verbose_name="")
-
 class Cart(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='cart_items')

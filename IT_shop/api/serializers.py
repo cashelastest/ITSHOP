@@ -12,3 +12,8 @@ class ProductSerializer(serializers.ModelSerializer):
 		# Делает seller видимым при GET запросах
 		representation['seller'] = instance.seller.user.username  # или другое поле, например, 'id'
 		return representation
+
+class PhotoSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = ProductImages
+		fields = ("__all__")

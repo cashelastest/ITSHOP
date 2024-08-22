@@ -37,7 +37,13 @@ HI!!!
             <p><b>{{ product.content }}</b></p>
             <p>Ціна: <b>{{product.price}}₴</b></p>
             <div><p>Фото:</p>
-
+            
+                {% if product.photo %}
+                    <img src="{{ product.photo.url }}" alt="{{ product.images.first.caption }}" width="85%" height="300px">
+                {% else %}
+                    <p>Фото не доступно</p>
+                {% endif %}
+            
                 {% for image in product.images.all %}
                     <div>
                         <img src="{{ image.photo.url }}" alt="{{ image.caption }}" width = 400px>{{image.image.url}}

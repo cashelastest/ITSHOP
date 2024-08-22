@@ -30,6 +30,13 @@ class ProductViewSet(viewsets.ModelViewSet):
 		else:
 			permission_classes = [IsAuthenticatedOrReadOnly]
 		return [permission() for permission in permission_classes]
+	@action(methods = ['get'], detail = True)
+	def images(self, request,pk):
+		pk = self.kwargs.get("pk")
+		if not pk:
+			return Response({'error':"Say hi to images, because we cant find them"})
+		images = ProductImages.objects.filter(pk = pk).values()
+		return Response({"imageSrc": list(images)})
 
 	@action(methods = ['get'], detail = False)
 	def category(self, request):
@@ -59,5 +66,3 @@ class ProductList(generics.ListCreateAPIView):
 	serializer_class = ProductSerializer
 	permission_classes = (IsAuthenticatedOrReadOnly,)
 
-
-# Create your views here.

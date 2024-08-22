@@ -8,9 +8,16 @@ import json
 import pdfkit  # Убедитесь, что у вас установлен pdfkit и wkhtmltopdf
 
 from shop.views import *
+import uuid
+
+def generate_reference_id():
+    return str(uuid.uuid4())
+
+
 def create_payment(request):
     cart_items = get_cart(request)
     amount = sum(item.product.price * item.quantity for item in cart_items)
+    reference_id = generate_reference_id()
     if amount == 0:
         return redirect('users:login')
     redirect_url = request.build_absolute_uri('/payment-success/')
@@ -22,7 +29,7 @@ def create_payment(request):
                 invoice_id=invoice_data['invoiceId'],
                 amount=amount,
                 currency=980,
-                reference='your_reference_id',
+                reference=reference_id,
                 destination='Payment for services',
                 status='pending'
             )

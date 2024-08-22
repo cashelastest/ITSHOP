@@ -65,6 +65,7 @@ class AddProduct(LoginRequiredMixin,CreateView):
             context['images'] = AddImagesFormSet(self.request.POST, self.request.FILES)
         else:
             context['images'] = AddImagesFormSet()
+
         context['profile'] = get_profile(self.request.user)
         return context
 
@@ -72,8 +73,12 @@ class AddProduct(LoginRequiredMixin,CreateView):
     def form_valid(self, form):
         context = self.get_context_data()
         images = context['images']
+        print(any(bool(image.get('image')) for image in images.cleaned_data))
         context['is_published']=False
-
+        try:
+            price = int(form.cleaned_data['price'])
+        except:
+            return redirect('add_product')
         self.object = form.save()
         if images.is_valid():
             images.instance = self.object

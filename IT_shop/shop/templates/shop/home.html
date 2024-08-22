@@ -38,9 +38,13 @@
 
         <h2>{{ product.name }}</h2>
         Ціна: {{ product.price }}₴<br><br>
-        <div>
-            <img src="{{ product.images.first.photo.url }}" alt="{{ product.images.first.caption }}" width="85%" height="400px">
-        </div><br>
+            <div>
+                {% if product.photo %}
+                    <img src="{{ product.photo.url }}" alt="{{ product.images.first.caption }}" width="85%" height="400px">
+                {% else %}
+                    <p>Фото не доступно</p>
+                {% endif %}
+            </div><br>
 
 {%if product.seller.user != profile.user%}
 

@@ -10,7 +10,7 @@ $(document).ready(function(){
 	$("b #id_images-4-photo").hide("fast");
 	$("b #id_images-5-photo").hide("fast");
 $("#add").click(function(){
-	if(value ==2){
+	if(value ==1){
 		alert("Вы не можете добавлять более трех фото")
 		return false
 	};
@@ -19,7 +19,7 @@ $("#add").click(function(){
 
 });
 $("#del").click(function(){
-	if (value == 0){
+	if (value == -1){
 		alert("Вы должны опублитковать хотя бы одну фотографию")
 		return false
 	}

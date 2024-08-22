@@ -49,7 +49,7 @@ class AddProduct(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ['name', 'content', 'price', 'category']
+        fields = ['name', 'content', 'price', 'category', 'photo']
 
         widgets = {
             'name': forms.TextInput(attrs={'class': 'charfield'}),
