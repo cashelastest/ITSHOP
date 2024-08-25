@@ -61,8 +61,9 @@ class ProductViewSet(viewsets.ModelViewSet):
 		user_products = Product.objects.filter(seller_id = pk, is_published = True).values()
 		return Response({'products':list(user_products)})
 		
+
 class ProductList(generics.ListCreateAPIView):
-	queryset = Product.objects.filter(is_published=True)
-	serializer_class = ProductSerializer
-	permission_classes = (IsAuthenticatedOrReadOnly,)
+    queryset = Product.objects.filter(is_published=True)
+    serializer_class = ProductSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 

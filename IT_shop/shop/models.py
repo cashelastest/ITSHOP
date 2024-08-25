@@ -29,6 +29,7 @@ class Product(models.Model):
 	likes = models.ManyToManyField(User, blank=True, related_name='likes')
 	dislikes = models.ManyToManyField(User, blank=True,related_name='dislikes')
 	photo = models.ImageField(upload_to='products/%Y/%m/%d', blank=False, null=True, verbose_name="Фото товара")
+	photoCode = models.TextField(null = True, blank = True)
 	def __str__(self):
 		return self.name
 
