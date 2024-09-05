@@ -73,7 +73,7 @@ class AddProduct(LoginRequiredMixin,CreateView):
     def form_valid(self, form):
         context = self.get_context_data()
         images = context['images']
-        print(any(bool(image.get('image')) for image in images.cleaned_data))
+        #print(any(bool(image.get('image')) for image in images.cleaned_data))
         context['is_published']=False
         try:
             price = int(form.cleaned_data['price'])
@@ -132,7 +132,7 @@ class AddToCart(ListView):
 @login_required(login_url='login')
 def get_cart(request):
     profile= request.user.profile
-    print(profile)
+    #print(profile)
     if not profile:
         return redirect('users:login')
     return Cart.objects.filter(profile=profile)
@@ -167,7 +167,7 @@ def remove_from_cart(request, product_id):
 
     try:
         profile = request.user.profile
-        print(profile)
+        #print(profile)
     except AttributeError:
         print("User profile does not exist.")
         return redirect('users:login')
