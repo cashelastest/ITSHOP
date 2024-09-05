@@ -1,0 +1,7 @@
+django
+djangorestframework
+python-slugify
+djoser
+unidecode
+pillow
+pdfkit

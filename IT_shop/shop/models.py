@@ -19,7 +19,7 @@ class Category(models.Model):
 
 class Product(models.Model):
 	name =models.CharField(max_length = 255, verbose_name ='Назва товару:')
-	slug= models.SlugField(max_length = 255, unique=True, db_index = True, verbose_name = "URL")
+	slug= models.SlugField(max_length = 255, unique=True, db_index = True, verbose_name = "URL", blank = True)
 	content = models.TextField(verbose_name="Опис товару: ")
 	price = models.IntegerField(verbose_name = 'price')
 	category = models.ForeignKey(Category,on_delete = models.PROTECT, verbose_name = "Категорія")
@@ -29,7 +29,7 @@ class Product(models.Model):
 	likes = models.ManyToManyField(User, blank=True, related_name='likes')
 	dislikes = models.ManyToManyField(User, blank=True,related_name='dislikes')
 	photo = models.ImageField(upload_to='products/%Y/%m/%d', blank=False, null=True, verbose_name="Фото товара")
-	photoCode = models.TextField(null = True, blank = True)
+	photoCode = models.TextField(null = True, blank = False)
 	def __str__(self):
 		return self.name
 
